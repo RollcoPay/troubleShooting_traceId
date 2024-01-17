@@ -1,6 +1,5 @@
 package monster.realrestfulman.trpr;
 
-import monster.realrestfulman.controller.TestController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

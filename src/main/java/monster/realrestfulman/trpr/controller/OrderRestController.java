@@ -24,7 +24,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/order")
 @RequiredArgsConstructor
-public class OrderController {
+public class OrderRestController {
     private final OrderService orderService;
 
     public ResponseEntity<?> postOrder1(HttpServletRequest servletRequest, @ModelAttribute OrderRequest request) {
