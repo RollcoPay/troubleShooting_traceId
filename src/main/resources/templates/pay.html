@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PG 연동 시스템</title>
+</head>
+<script>
+    function submitForm() {
+        // Form 데이터를 수집
+        var formData = {
+            order_1_name: $("input[name='order_1_name']").val(),
+            order_2_name: $("input[name='order_2_name']").val(),
+            order_1_amount: $("input[name='order_1_amount']").val(),
+            order_2_amount: $("input[name='order_2_amount']").val(),
+            TRACE_ID: $("input[name='TRACE_ID']").val()
+        };
+
+        // AJAX 통신 설정
+        $.ajax({
+            type: "POST",
+            url: "/order/settle",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function(response) {
+                // 성공적으로 통신 완료
+                console.log(response);
+            },
+            error: function(error) {
+                // 통신 실패 시 처리
+                console.log(error);
+            }
+        });
+    }
+</script>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 통신 예시</title>
+    <!-- jQuery CDN 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<div>
+
+    <p th:text="${order.id}"></p>
+    <h6 th:text="${dataMap.TRACE_ID}"></h6>
+</div>
+<form id="orderForm">
+    <input type="text" name="order_1_name" placeholder="주문1 이름"/>
+    <input type="text" name="order_2_name" placeholder="주문2 이름"/>
+    <br>
+    <input type="text" name="order_1_amount" placeholder="주문1 가격"/>
+    <input type="text" name="order_2_amount" placeholder="주문2 가격"/>
+    <br>
+    <input type="text" name="TRACE_ID" placeholder="TRACE_ID" th:value="${dataMap.TRACE_ID}"/>
+    <button type="button" onclick="submitForm()">전송</button>
+</form>
+</body>
+</html>
+
+
+</body>
+</html>
