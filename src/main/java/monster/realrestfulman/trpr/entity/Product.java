@@ -1,6 +1,8 @@
 package monster.realrestfulman.trpr.entity;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * Created by Robin on 2023/12/27.
@@ -8,6 +10,8 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "PRODUCT")
+@ToString
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

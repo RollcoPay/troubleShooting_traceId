@@ -3,6 +3,7 @@ package monster.realrestfulman.trpr.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * Created by Robin on 2023/12/22.
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "ORDER")
 @Getter
 @NoArgsConstructor
+@ToString
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
