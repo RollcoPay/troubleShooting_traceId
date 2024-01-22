@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import monster.realrestfulman.trpr.aop.TraceIdAnnotation;
 import monster.realrestfulman.trpr.aop.TraceInfo;
 import monster.realrestfulman.trpr.controller.dto.OrderRequest;
 import monster.realrestfulman.trpr.entity.Order;
@@ -32,15 +33,17 @@ public class OrderController {
     private final OrderService orderService;
 
 
+    @TraceIdAnnotation
     @GetMapping("/ready")
     public String ready(Model model, HashMap dataMap) {
         dataMap.put("TRACE_ID", MDC.get("TRACE_ID"));
-
+        log.info(MDC.get("TRACE_ID"));
         model.addAttribute("dataMap", dataMap);
         return "ready";
     }
 
 
+    @TraceIdAnnotation
     @GetMapping("/pay")
     public String pay(Model model, @RequestParam Map<String, Object> dataMap) {
         MDC.put("TRACE_ID", (String) dataMap.get("TRACE_ID"));  //// -> "AOP로 빼야하는 부분."
@@ -53,6 +56,7 @@ public class OrderController {
     }
 
 
+    @TraceIdAnnotation
     @PostMapping("/settle")
     @ResponseBody
     public ResponseEntity<Map> settle(Model model, @RequestBody Map<String, String> dataMap) {
