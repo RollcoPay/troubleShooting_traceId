@@ -35,9 +35,10 @@ public class OrderController {
 
     @TraceIdAnnotation
     @GetMapping("/ready")
-    public String ready(Model model, HashMap dataMap) {
-        dataMap.put("TRACE_ID", MDC.get("TRACE_ID"));
-        log.info(MDC.get("TRACE_ID"));
+    public String ready(Model model, HashMap dataMap,HttpServletRequest request) {
+        log.info("TRACE_ID = {}",request.getAttribute("TRACE_ID"));
+        dataMap.put("TRACE_ID",request.getAttribute("TRACE_ID"));
+        log.info("AOP TRACE_ID {}",MDC.get("TRACE_ID"));
         model.addAttribute("dataMap", dataMap);
         return "ready";
     }

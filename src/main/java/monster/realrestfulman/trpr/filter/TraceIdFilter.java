@@ -30,6 +30,7 @@ public class TraceIdFilter extends OncePerRequestFilter {
         String TRACE_ID = "SMT" + UUID.randomUUID().toString().substring(0, 15);
         MDC.put("TRACE_ID", TRACE_ID);
         log.info("TRACE_ID : {}", TRACE_ID);
+        request.setAttribute("TRACE_ID", TRACE_ID);
 
 
         String traceInfoHeader = request.getHeader("traceInfo");

@@ -1,5 +1,6 @@
 package monster.realrestfulman.trpr.aop;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 
 @Aspect
 @Component
+@Slf4j
 public class TraceIdAspect {
 
     @Pointcut("@annotation(monster.realrestfulman.trpr.aop.TraceIdAnnotation)")
@@ -23,6 +25,7 @@ public class TraceIdAspect {
         for (Object arg : args) {
             if (arg instanceof HashMap) {
                 HashMap<String, String> dataMap = (HashMap<String, String>) arg;
+                log.info(dataMap.toString());
                 MDC.put("TRACE_ID", dataMap.get("TRACE_ID"));
             }
         }
