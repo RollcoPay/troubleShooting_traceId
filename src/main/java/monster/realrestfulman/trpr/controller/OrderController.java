@@ -1,6 +1,6 @@
 package monster.realrestfulman.trpr.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class OrderController {
 
     @TraceIdAnnotation
     @GetMapping("/ready")
-    public String ready(Model model, HashMap dataMap,HttpServletRequest request) {
+    public String ready(Model model, HashMap dataMap, HttpServletRequest request) {
         log.info("TRACE_ID = {}",request.getAttribute("TRACE_ID"));
         dataMap.put("TRACE_ID",request.getAttribute("TRACE_ID"));
         log.info("AOP TRACE_ID {}",MDC.get("TRACE_ID"));
@@ -46,7 +47,8 @@ public class OrderController {
 
     @TraceIdAnnotation
     @GetMapping("/pay")
-    public String pay(Model model, @RequestParam Map<String, Object> dataMap) {
+    public String pay(Model model, @RequestParam Map<String, Object> dataMap, HttpServletRequest request) {
+
         MDC.put("TRACE_ID", (String) dataMap.get("TRACE_ID"));  //// -> "AOP로 빼야하는 부분."
 
         Order order = orderService.save2(dataMap);

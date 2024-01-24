@@ -8,7 +8,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 @Aspect
 @Component
@@ -23,11 +25,17 @@ public class TraceIdAspect {
     public Object addTraceId(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
-            if (arg instanceof HashMap) {
-                HashMap<String, String> dataMap = (HashMap<String, String>) arg;
-                log.info(dataMap.toString());
-                MDC.put("TRACE_ID", dataMap.get("TRACE_ID"));
+            if (arg instanceof LinkedHashMap<?,?>){
+                log.info("arg : {}",arg.toString());
+                if (arg instanceof HashMap) {
+                    HashMap<String, String> dataMap = (HashMap<String, String>) arg;
+                    log.info(String.valueOf(args.length));
+                    log.info(dataMap.toString());
+                    MDC.put("TRACE_ID", dataMap.get("TRACE_ID"));
+            }else {}
+                log.info("heelo");
             }
+
         }
 
         return joinPoint.proceed();

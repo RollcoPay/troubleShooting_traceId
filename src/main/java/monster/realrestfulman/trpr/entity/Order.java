@@ -1,9 +1,10 @@
 package monster.realrestfulman.trpr.entity;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import javax.persistence.*;
 
 /**
  * Created by Robin on 2023/12/22.

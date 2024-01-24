@@ -1,8 +1,10 @@
 package monster.realrestfulman.trpr.entity;
 
-import jakarta.persistence.*;
+
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import javax.persistence.*;
 
 /**
  * Created by Robin on 2023/12/27.
@@ -14,7 +16,8 @@ import lombok.ToString;
 @ToString
 public class ProductList {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType
+            .IDENTITY)
     private long id;
 
     @ManyToOne
