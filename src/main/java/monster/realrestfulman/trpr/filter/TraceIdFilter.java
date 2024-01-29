@@ -33,11 +33,10 @@ public class TraceIdFilter extends OncePerRequestFilter {
         log.info("TRACE_ID : {}", TRACE_ID);
         request.setAttribute("TRACE_ID", TRACE_ID);
 
-
-        String traceInfoHeader = request.getHeader("traceInfo");
-        if (Optional.ofNullable(traceInfoHeader).isPresent()) {
-            log.info(traceInfoHeader);
-        }
+//        String traceInfoHeader = request.getHeader("traceInfo");
+//        if (Optional.ofNullable(traceInfoHeader).isPresent()) {
+//            log.info(traceInfoHeader);
+//        }
         filterChain.doFilter(request, response);
         MDC.clear();
     }
