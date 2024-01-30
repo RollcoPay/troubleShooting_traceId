@@ -38,7 +38,7 @@ public class OrderController {
     @GetMapping("/ready")
     public String ready(Model model, HashMap dataMap, HttpServletRequest request) {
         log.info((String) request.getAttribute("TRACE_ID"));
-        dataMap.put("TRACE_ID","1234");
+        dataMap.put("TRACE_ID",(String) request.getAttribute("TRACE_ID"));
         model.addAttribute("dataMap", dataMap);
         return "ready";
     }
@@ -53,6 +53,18 @@ public class OrderController {
         model.addAttribute("order", order);
         return "pay";
     }
+
+
+    @TraceIdAnnotation
+    @PostMapping("/auth")
+    public String auth(Model model, @RequestParam Map<String, Object> dataMap, HttpServletRequest request) {
+        Order order = orderService.save2(dataMap);
+        log.info(order.toString());
+        model.addAttribute("dataMap", dataMap);
+        model.addAttribute("order", order);
+        return "auth";
+    }
+
 
 
     @TraceIdAnnotation

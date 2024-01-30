@@ -45,17 +45,17 @@
 </head>
 <body>
 <div>
-
+    <h5>PAY</h5>
     <p th:text="${order.id}"></p>
     <h6 th:text="${dataMap.TRACE_ID}"></h6>
 </div>
 <form id="orderForm">
-    <input type="text" name="order_1_name" placeholder="주문1 이름"/>
-    <input type="text" name="order_2_name" placeholder="주문2 이름"/>
-    <br>
-    <input type="text" name="order_1_amount" placeholder="주문1 가격"/>
-    <input type="text" name="order_2_amount" placeholder="주문2 가격"/>
-    <br>
+    <input type="text" name="order_1_name" placeholder="주문1 이름" th:value="${dataMap.order_1_name}"/>
+    <input type="text" name="order_2_name" placeholder="주문2 이름" th:value="${dataMap.order_2_name}"/>
+
+    <input type="text" name="order_1_amount" placeholder="주문1 가격" th:value="${dataMap.order_1_amount}"/>
+    <input type="text" name="order_2_amount" placeholder="주문2 가격" th:value="${dataMap.order_2_amount}"/>
+
     <input type="text" name="TRACE_ID" placeholder="TRACE_ID" th:value="${dataMap.TRACE_ID}"/>
     <button type="button" onclick="submitForm()">전송</button>
 </form>

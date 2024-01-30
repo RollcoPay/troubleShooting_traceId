@@ -32,6 +32,7 @@ public class OrderServiceImpl implements OrderService{
         Order order = new Order(new ProductList(new Product((String) dataMap.get("order_1_name"), amount)), amount);
 //        orderRepository.save(order);
         log.info("order : {}",order.toString());
+        log.info("TEST : {}", "SAVE2");
         return order;
     }
 }

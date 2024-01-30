@@ -8,8 +8,9 @@
 <body>
 
 <div>
+    <h5>READY</h5>
     <h6 th:text="${dataMap.TRACE_ID}"></h6>
-    <form action="/order/pay" method="GET">
+    <form action="/order/auth" method="POST">
         <input type="text" name="order_1_name" placeholder="주문1 이름"/>
         <input type="text" name="order_2_name" placeholder="주문2 이름"/>
 
