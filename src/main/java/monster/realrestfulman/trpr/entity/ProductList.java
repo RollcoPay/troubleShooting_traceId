@@ -16,8 +16,7 @@ import javax.persistence.*;
 @ToString
 public class ProductList {
     @Id
-    @GeneratedValue(strategy = GenerationType
-            .IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne

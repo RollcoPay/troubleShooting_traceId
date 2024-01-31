@@ -45,7 +45,7 @@ public class OrderController {
 
 
     @TraceIdAnnotation
-    @GetMapping("/pay")
+    @PostMapping("/pay")
     public String pay(Model model, @RequestParam Map<String, Object> dataMap, HttpServletRequest request) {
         Order order = orderService.save2(dataMap);
         log.info(order.toString());
@@ -73,7 +73,7 @@ public class OrderController {
     public ResponseEntity<Map> settle(Model model, @RequestBody Map<String, String> dataMap) {
 //        MDC.put("TRACE_ID", (String) dataMap.get("TRACE_ID"));  //// -> "AOP로 빼야하는 부분."
 
-        log.info("settle , dataMap  : {}", dataMap.toString());
+        log.info("settle , dataMap  : {}", dataMap);
         model.addAttribute("dataMap", dataMap);
 
         return ResponseEntity.ok(dataMap);

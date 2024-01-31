@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Description :
  */
 @Entity
-@Table(name = "ORDER")
+@Table(name = "my_order")
 @Getter
 @NoArgsConstructor
 @ToString
