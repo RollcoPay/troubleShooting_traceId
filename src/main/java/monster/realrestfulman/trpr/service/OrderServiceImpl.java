@@ -34,12 +34,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order save2(Map dataMap) {
         int amount = Integer.parseInt((String) dataMap.get("order_1_amount"));
-<<<<<<< Updated upstream
-        Order order = new Order(new ProductList(new Product((String) dataMap.get("order_1_name"), amount)), amount);
-//        orderRepository.save(order);
-        log.info("order : {}",order.toString());
-        log.info("TEST : {}", "SAVE2");
-=======
         Product product = new Product((String) dataMap.get("order_1_name"), amount);
         productRepository.save(product);
         ProductList productList = new ProductList(product);
@@ -47,7 +41,6 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order(productList, amount);
         orderRepository.save(order);
         log.info("order : {}", order);
->>>>>>> Stashed changes
         return order;
     }
 }
