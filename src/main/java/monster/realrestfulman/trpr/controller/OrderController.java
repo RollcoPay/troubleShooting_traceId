@@ -38,7 +38,7 @@ public class OrderController {
     @GetMapping("/ready")
     public String ready(Model model, HashMap dataMap, HttpServletRequest request) {
         log.info((String) request.getAttribute("TRACE_ID"));
-        log.info("LOG");
+        log.info("log");
         dataMap.put("TRACE_ID",(String) request.getAttribute("TRACE_ID"));
         model.addAttribute("dataMap", dataMap);
         return "ready";
