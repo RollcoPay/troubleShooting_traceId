@@ -4,3 +4,7 @@ src/main/resources/application.properties
 *.bin
 *.lock
 *.probe
+*.uniqueId0
+*.log
+build/*
+!build/build.xml
