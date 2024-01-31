@@ -9,4 +9,4 @@ src/main/resources/application.properties
 build/*
 !build/build.xml
 .gradle/*
-.idea
+.idea/*
