@@ -37,9 +37,8 @@ public class OrderController {
     @TraceIdAnnotation
     @GetMapping("/ready")
     public String ready(Model model, HashMap dataMap, HttpServletRequest request) {
-        log.info("TRACE_ID = {}",request.getAttribute("TRACE_ID"));
-        dataMap.put("TRACE_ID",request.getAttribute("TRACE_ID"));
-        log.info("AOP TRACE_ID {}",MDC.get("TRACE_ID"));
+        log.info((String) request.getAttribute("TRACE_ID"));
+        dataMap.put("TRACE_ID",(String) request.getAttribute("TRACE_ID"));
         model.addAttribute("dataMap", dataMap);
         return "ready";
     }
@@ -48,9 +47,6 @@ public class OrderController {
     @TraceIdAnnotation
     @GetMapping("/pay")
     public String pay(Model model, @RequestParam Map<String, Object> dataMap, HttpServletRequest request) {
-
-        MDC.put("TRACE_ID", (String) dataMap.get("TRACE_ID"));  //// -> "AOP로 빼야하는 부분."
-
         Order order = orderService.save2(dataMap);
         log.info(order.toString());
         model.addAttribute("dataMap", dataMap);
@@ -60,10 +56,22 @@ public class OrderController {
 
 
     @TraceIdAnnotation
+    @PostMapping("/auth")
+    public String auth(Model model, @RequestParam Map<String, Object> dataMap, HttpServletRequest request) {
+        Order order = orderService.save2(dataMap);
+        log.info(order.toString());
+        model.addAttribute("dataMap", dataMap);
+        model.addAttribute("order", order);
+        return "auth";
+    }
+
+
+
+    @TraceIdAnnotation
     @PostMapping("/settle")
     @ResponseBody
     public ResponseEntity<Map> settle(Model model, @RequestBody Map<String, String> dataMap) {
-        MDC.put("TRACE_ID", (String) dataMap.get("TRACE_ID"));  //// -> "AOP로 빼야하는 부분."
+//        MDC.put("TRACE_ID", (String) dataMap.get("TRACE_ID"));  //// -> "AOP로 빼야하는 부분."
 
         log.info("settle , dataMap  : {}", dataMap.toString());
         model.addAttribute("dataMap", dataMap);

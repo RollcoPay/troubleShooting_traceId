@@ -25,20 +25,18 @@ public class TraceIdAspect {
     public Object addTraceId(ProceedingJoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
-            if (arg instanceof LinkedHashMap<?,?>){
-                log.info("arg : {}",arg.toString());
-                if (arg instanceof HashMap) {
-                    HashMap<String, String> dataMap = (HashMap<String, String>) arg;
-                    log.info(String.valueOf(args.length));
-                    log.info(dataMap.toString());
-                    MDC.put("TRACE_ID", dataMap.get("TRACE_ID"));
-            }else {}
-                log.info("heelo");
-            }
+            if (arg instanceof HashMap) {
+                @SuppressWarnings("unchecked")
+                HashMap<String, String> paramMap = (HashMap<String, String>) arg;
 
+                if (paramMap.containsKey("TRACE_ID")) {
+                    String traceId = paramMap.get("TRACE_ID");
+                    MDC.put("TRACE_ID", traceId);
+                    log.info("Added traceId to MDC: {}", traceId);
+                }
+            }
+        }
+            return joinPoint.proceed();
         }
 
-        return joinPoint.proceed();
-    }
 }
-

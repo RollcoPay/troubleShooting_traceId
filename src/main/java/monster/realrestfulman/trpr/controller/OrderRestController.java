@@ -28,7 +28,7 @@ import java.util.Map;
 public class OrderRestController {
     private final OrderService orderService;
 
-    public ResponseEntity<?> postOrder1(HttpServletRequest servletRequest, @ModelAttribute OrderRequest request) {
+    public ResponseEntity<?> postorder_1(HttpServletRequest servletRequest, @ModelAttribute OrderRequest request) {
         log.info("주문내역::상품=" + request.getProductName() + ":가격=" + request.getAmount());
         Map<String, String> body = new HashMap<>();
         body.put("msg", "주문 완료!");
@@ -38,7 +38,7 @@ public class OrderRestController {
     }
 
     @PostMapping
-    public ResponseEntity<?> postOrder2(@TraceInfo String traceInfo, @RequestBody OrderRequest request) {
+    public ResponseEntity<?> postorder_2(@TraceInfo String traceInfo, @RequestBody OrderRequest request) {
         log.info("주문내역::상품=" + request.getProductName() + ":가격=" + request.getAmount());
         Order order = new Order(new ProductList(new Product(request.getProductName(), request.getAmount())), request.getAmount());
         orderService.save(order);
